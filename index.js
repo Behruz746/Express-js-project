@@ -1,24 +1,25 @@
 import express from "express";
-import fs from "fs";
-import path, { dirname } from "path"; // package da type module bolgani uchun __dirnameni path module olqali olamiz
-import { fileURLToPath } from "url";
-
-// file pathlari
-const __filename = fileURLToPath(import.meta.url);
-// folder pathlari
-const __dirname = dirname(__filename);
+import { create } from "express-handlebars";
 
 // express methodlarini saqlovchiga olish
 const app = express();
 
+// hbs configs
+const hbs = create({
+  defaultLayout: "main", // default shablon nomi
+  extname: "hbs", // file kengaytirma nomi
+});
+
+app.engine("hbs", hbs.engine);
+app.set("view engine", "hbs");
+app.set("viewa", "./views");
+
 app.get("/", (req, res) => {
-  res.status(200);
-  res.sendFile(path.join(__dirname, "views", "index.html"));
+  res.render("index");
 });
 
 app.get("/about", (req, res) => {
-  res.status(200);
-  res.sendFile(path.join(__dirname, "views", "about.html"));
+  res.render("about");
 });
 
 const PORT = process.env.PORT || 4100;
