@@ -1,5 +1,7 @@
 import express from "express";
 import { create } from "express-handlebars";
+import AutherRouters from "./routes/auth.js";
+import ProductRouters from "./routes/products.js";
 
 // express methodlarini saqlovchiga olish
 const app = express();
@@ -14,13 +16,8 @@ app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("viewa", "./views");
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
-
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+app.use(AutherRouters);
+app.use(ProductRouters);
 
 const PORT = process.env.PORT || 4100;
 app.listen(PORT, () => {
