@@ -1,7 +1,14 @@
 <div class="w-75 mx-auto">
   <p class="fs-1">Register</p>
+  {{#if registerErr}}
+    <div class="promis mb-3">
+      <p>{{registerErr}}</p>
+      <button type="button" class="remove__btn">
+        <img src="remove.svg" alt="remove icon" />
+      </button>
+    </div>
+  {{/if}}
   <form action="/register" method="post">
-
     <div class="d-flex gap-3">
       <div class="form-floating mb-3 w-50">
         <input

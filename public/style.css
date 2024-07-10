@@ -1,0 +1,26 @@
+.promis {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  padding: 5px 15px;
+  border: 1px solid rgb(255, 0, 0);
+  background-color: rgba(255, 0, 0, 0.423);
+}
+.promis p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+}
+.promis button {
+  padding: 10px;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+}
+.promis button img {
+  width: 24px;
+  height: 24px;
+}/*# sourceMappingURL=style.css.map */
