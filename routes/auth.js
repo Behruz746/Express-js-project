@@ -15,4 +15,16 @@ router.get("/register", (req, res) => {
   });
 });
 
+router.post("/login", (req, res) => {
+  console.log(req.body);
+  // login bo'lgandan so'ng home pagega userni o'tqizvoradi   res.redirect("/")
+  res.redirect("/");
+});
+
+router.post("/register", (req, res) => {
+  console.log(req.body);
+  // login bo'lgandan so'ng home pagega userni o'tqizvoradi   res.redirect("/")
+  res.redirect("/");
+});
+
 export default router;

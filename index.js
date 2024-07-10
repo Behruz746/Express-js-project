@@ -15,6 +15,7 @@ const hbs = create({
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("viewa", "./views");
+app.use(express.urlencoded({ extended: true }));
 
 app.use(AutherRouters);
 app.use(ProductRouters);
