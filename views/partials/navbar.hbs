@@ -25,29 +25,58 @@
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a
-          class="me-3 py-2 link-body-emphasis text-decoration-none"
-          href="/products"
-        >Products</a>
-        <a
-          class="me-3 py-2 link-body-emphasis text-decoration-none"
-          href="/add"
-        >Add</a>
+
+        {{#if isProducts}}
+          <a class="me-3 py-2 link-body-emphasis" href="/products">Products</a>
+        {{else}}
+          <a
+            class="me-3 py-2 link-body-emphasis text-decoration-none"
+            href="/products"
+          >Products</a>
+        {{/if}}
+
+        {{#if isAdd}}
+          <a class="me-3 py-2 link-body-emphasis" href="/add">Add</a>
+        {{else}}
+          <a
+            class="me-3 py-2 link-body-emphasis text-decoration-none"
+            href="/add"
+          >Add</a>
+        {{/if}}
+
         <div
           class="btn-group"
           role="group"
           aria-label="Basic mixed styles example"
         >
-          <a
-            class="text-light text-decoration-none btn btn-primary"
-            href="/login"
-          >
-            Login</a>
-          <a
-            class="text-light text-decoration-none btn btn-success"
-            href="/register"
-          >
-            Register</a>
+          {{#if isLogin}}
+            <a
+              class="text-light btn text-decoration-none btn-primary active"
+              href="/login"
+            >
+              Login</a>
+          {{else}}
+            <a
+              class="text-light text-decoration-none btn btn-primary"
+              href="/login"
+            >
+              Login</a>
+          {{/if}}
+
+          {{#if isRegister}}
+            <a
+              class="text-light text-decoration-none btn btn-success active"
+              href="/register"
+            >
+              Register</a>
+          {{else}}
+            <a
+              class="text-light text-decoration-none btn btn-success"
+              href="/register"
+            >
+              Register</a>
+          {{/if}}
+
         </div>
       </nav>
     </div>
