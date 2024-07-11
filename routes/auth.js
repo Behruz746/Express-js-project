@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { generateJWTToken } from "../services/token.service.js";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 const router = Router();
@@ -47,8 +48,9 @@ router.post("/login", async (req, res) => {
       return;
     }
 
+    const token = generateJWTToken(existUser._id);
+    res.cookie("token", token, { httpOnly: true, secure: true });
     console.log(existUser);
-    // login bo'lgandan so'ng home pagega userni o'tqizvoradi   res.redirect("/")
     res.redirect("/");
   } catch (error) {
     console.error("Userni topishda xato yuz berdi:", error);
@@ -64,11 +66,6 @@ router.post("/register", async (req, res) => {
     if (!firstName || !lastName || !email || !password) {
       req.flash("registerErr", "All fields is required");
       res.redirect("/register");
-
-      // document.querySelector(".remove__btn").addEventListener("click", () => {
-      //   req.flash("registerErr", "");
-      // });
-
       return;
     }
 
@@ -91,7 +88,8 @@ router.post("/register", async (req, res) => {
     };
 
     const user = await User.create(userData);
-    console.log(user);
+    const token = generateJWTToken(user._id);
+    res.cookie("token", token, { httpOnly: true, secure: true });
     res.redirect("/");
   } catch (error) {
     console.error("User yaratishda xato yuz berdi:", error);
