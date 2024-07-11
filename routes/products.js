@@ -1,4 +1,5 @@
 import { Router } from "express";
+import Product from "../models/Product.js";
 const router = Router();
 
 router.get("/", (req, res) => {
@@ -21,9 +22,17 @@ router.get("/add", (req, res) => {
   });
 });
 
-router.post("/add-products", (req, res) => {
-  console.log(req.body);
-  res.redirect("/");
+router.post("/add-products", async (req, res) => {
+  try {
+    const { title, description, image, price } = req.body;
+    const product = await Product.create(req.body);
+
+    console.log(product);
+ 
+    res.redirect("/");
+  } catch (error) {
+    console.log("Product yaratishda xatolik bo'ldi ", error);
+  }
 });
 
 export default router;
