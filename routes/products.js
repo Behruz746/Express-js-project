@@ -4,10 +4,20 @@ import userMiddleware from "../middleware/user.js";
 import Product from "../models/Product.js";
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.render("index", {
-    title: "Boom Shop",
-  });
+router.get("/", async (req, res) => {
+  try {
+    // Product.find(); product serverdagi hamma malumotlarni olibberadi
+    // lean() method malumotni JSON formatga o'griberadi
+    const products = await Product.find().lean();
+    console.log(products);
+
+    res.render("index", {
+      title: "Boom Shop",
+      product: products,
+    });
+  } catch (error) {
+    console.log("Serverdan malumot olishda xatolik yuzberdi", error);
+  }
 });
 
 router.get("/products", (req, res) => {
