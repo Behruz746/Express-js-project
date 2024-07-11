@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import * as dotenv from "dotenv";
 import flash from "connect-flash";
+import varMiddleware from "./middleware/var.js";
 // Routes
 import AutherRouters from "./routes/auth.js";
 import ProductRouters from "./routes/products.js";
@@ -26,12 +27,12 @@ app.set("views", "./views"); // Typo correction here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json());
-app.use(cookieParser("keyboard cat"));
+app.use(cookieParser());
 app.use(
   session({ secret: "darkUser", resave: false, saveUninitialized: false })
 );
 app.use(flash());
-
+app.use(varMiddleware);
 app.use(AutherRouters);
 app.use(ProductRouters);
 

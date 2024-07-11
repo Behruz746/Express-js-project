@@ -49,34 +49,42 @@
           role="group"
           aria-label="Basic mixed styles example"
         >
-          {{#if isLogin}}
+          {{#if token}}
             <a
-              class="text-light btn text-decoration-none btn-primary active"
+              class="text-light text-decoration-none btn btn-danger"
               href="/login"
             >
-              Login</a>
+              Logout</a>
           {{else}}
-            <a
-              class="text-light text-decoration-none btn btn-primary"
-              href="/login"
-            >
-              Login</a>
-          {{/if}}
+            {{#if isLogin}}
+              <a
+                class="text-light btn text-decoration-none btn-primary active"
+                href="/login"
+              >
+                Login</a>
+            {{else}}
+              <a
+                class="text-light text-decoration-none btn btn-primary"
+                href="/login"
+              >
+                Login</a>
+            {{/if}}
 
-          {{#if isRegister}}
-            <a
-              class="text-light text-decoration-none btn btn-success active"
-              href="/register"
-            >
-              Register</a>
-          {{else}}
-            <a
-              class="text-light text-decoration-none btn btn-success"
-              href="/register"
-            >
-              Register</a>
-          {{/if}}
+            {{#if isRegister}}
+              <a
+                class="text-light text-decoration-none btn btn-success active"
+                href="/register"
+              >
+                Register</a>
+            {{else}}
+              <a
+                class="text-light text-decoration-none btn btn-success"
+                href="/register"
+              >
+                Register</a>
+            {{/if}}
 
+          {{/if}}
         </div>
       </nav>
     </div>
