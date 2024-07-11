@@ -4,7 +4,20 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 const router = Router();
 
+// pagelar uchun navigation functionni
+function navigation(res, path = "") {
+  res.redirect(`/${path}`);
+}
+
+// function agar token bo'lsa login va register page qilish userga blocklandi
+function returnToMain(req, res) {
+  if (req.cookies.token) {
+    navigation(res);
+  }
+}
+
 router.get("/login", (req, res) => {
+  returnToMain(req, res);
   res.render("login", {
     title: "Login | Boom Shoop",
     isLogin: true,
@@ -13,6 +26,7 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/register", (req, res) => {
+  returnToMain(req, res);
   res.render("register", {
     title: "Register | Boom Shop",
     isRegister: true,
@@ -35,7 +49,7 @@ router.post("/login", async (req, res) => {
     // agar email false bolsa error ishlasin
     if (!existUser) {
       req.flash("loginErr", "User not found");
-      res.redirect("/login");
+      navigation(res, "login");
       return;
     }
 
@@ -44,17 +58,28 @@ router.post("/login", async (req, res) => {
     // password false bo'lsa error ishlasin
     if (!isPassEqual) {
       req.flash("loginErr", "Password Wrong");
-      res.redirect("/login");
+      navigation(res, "login");
       return;
     }
 
     const token = generateJWTToken(existUser._id);
     res.cookie("token", token, { httpOnly: true, secure: true });
     console.log(existUser);
-    res.redirect("/");
+    navigation(res);
   } catch (error) {
     console.error("Userni topishda xato yuz berdi:", error);
     res.status(500).send("Userni topishda xato yuz berdi");
+  }
+});
+
+router.get("/logout", async (req, res) => {
+  try {
+    console.log(res);
+    res.clearCookie("token");
+    navigation(res);
+  } catch (error) {
+    console.error("User akoubtdan chiqishda xatolik yuz berdi:", error);
+    res.status(500).send("User akoubtdan chiqishda xatolik yuz berdi");
   }
 });
 
@@ -65,13 +90,13 @@ router.post("/register", async (req, res) => {
 
     if (!firstName || !lastName || !email || !password) {
       req.flash("registerErr", "All fields is required");
-      res.redirect("/register");
+      navigation(res, "register");
       return;
     }
 
     if (existUser) {
       req.flash("registerErr", "This email has been used before");
-      res.redirect("/register");
+      navigation(res, "register");
       return;
     }
 
@@ -90,7 +115,7 @@ router.post("/register", async (req, res) => {
     const user = await User.create(userData);
     const token = generateJWTToken(user._id);
     res.cookie("token", token, { httpOnly: true, secure: true });
-    res.redirect("/");
+    navigation(res);
   } catch (error) {
     console.error("User yaratishda xato yuz berdi:", error);
     res.status(500).send("User yaratishda xato yuz berdi");
