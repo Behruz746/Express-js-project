@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { generateJWTToken } from "../services/token.service.js";
 import User from "../models/User.js";
+import { authMiddleware } from "../middleware/auth.js";
 import bcrypt from "bcrypt";
 const router = Router();
 
@@ -9,15 +10,7 @@ function navigation(res, path = "") {
   res.redirect(`/${path}`);
 }
 
-// function agar token bo'lsa login va register page qilish userga blocklandi
-function returnToMain(req, res) {
-  if (req.cookies.token) {
-    navigation(res);
-  }
-}
-
-router.get("/login", (req, res) => {
-  returnToMain(req, res);
+router.get("/login", authMiddleware, (req, res) => {
   res.render("login", {
     title: "Login | Boom Shoop",
     isLogin: true,
@@ -25,8 +18,7 @@ router.get("/login", (req, res) => {
   });
 });
 
-router.get("/register", (req, res) => {
-  returnToMain(req, res);
+router.get("/register", authMiddleware, (req, res) => {
   res.render("register", {
     title: "Register | Boom Shop",
     isRegister: true,
@@ -40,7 +32,7 @@ router.post("/login", async (req, res) => {
 
     if (!email || !password) {
       req.flash("loginErr", "All fields is required");
-      res.redirect("/login");
+      navigation(res, "login");
       return;
     }
 

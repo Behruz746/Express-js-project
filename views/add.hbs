@@ -1,5 +1,13 @@
 <div class="w-75 mx-auto">
   <p class="fs-1">Add product</p>
+  {{#if addProductErr}}
+    <div class="promis mb-3">
+      <p>{{addProductErr}}</p>
+      <button type="button" class="remove__btn">
+        <img src="remove.svg" alt="remove icon" />
+      </button>
+    </div>
+  {{/if}}
   <form action="/add-products" method="post">
     <div class="form-floating mb-3">
       <input
