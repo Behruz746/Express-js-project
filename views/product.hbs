@@ -10,6 +10,38 @@
 >
 </div>
 <p class="fs-1">{{product.title}}</p>
+<div
+  style="display: flex;
+  align-items: center;
+  gap: 8px;"
+>
+  <div
+    style=" width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  border-radius: 50%;"
+  >
+    <p
+      style=" text-transform: capitalize;
+    color: #fff;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;"
+    >{{getFullName product.user.firstName product.user.lastName}}
+    </p>
+  </div>
+  <p
+    style=" text-transform: capitalize;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;"
+  >
+    {{product.user.firstName}}
+    {{product.user.lastName}}</p>
+</div>
 <div class="d-flex gap-5 align-items-center">
 
   <small class="text-muted">Created at: {{formatDate product.createdAt}}</small>
