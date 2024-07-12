@@ -127,7 +127,19 @@
 .card__btns {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 3px;
+
+  a {
+    width: 65px;
+    border: 0;
+    outline: 0;
+    border-radius: 6px;
+    padding: 5px 8px;
+    text-align: center;
+    background-color: blue;
+    color: #fff;
+    text-decoration: none;
+  }
 
   button {
     width: 65px;
@@ -135,12 +147,9 @@
     outline: 0;
     border-radius: 6px;
     padding: 5px 8px;
+    text-align: center;
   }
 
-  button:nth-child(1) {
-    background-color: blue;
-    color: #fff;
-  }
   button:nth-child(2) {
     background-color: rgb(21, 167, 52);
     color: #fff;
@@ -149,6 +158,12 @@
     background-color: red;
     color: #fff;
   }
+}
+
+.card__auther {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .card__avatar {

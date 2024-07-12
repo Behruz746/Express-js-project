@@ -20,6 +20,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/product/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const product = await Product.findById(id).populate("user").lean();
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
+    res.render("product", {
+      product: product,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server error");
+  }
+});
+
 router.get("/products", async (req, res) => {
   const user = req.userId ? req.userId.toString() : null;
   const myProducts = await Product.find({ user }).populate("user").lean();

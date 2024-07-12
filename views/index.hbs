@@ -33,7 +33,11 @@
 
           <div class="card__footer">
             <div class="card__btns">
-              <button type="button" class="card__btn">View</button>
+              <a
+                type="button"
+                href="/product/{{_id}}"
+                class="card__btn"
+              >Detail</a>
               {{#if @root.token}}
                 {{#ifequal user @root.userId}}
                   <button type="button" class="card__btn">Edit</button>
@@ -41,7 +45,7 @@
                 {{/ifequal}}
               {{/if}}
             </div>
-            <p>time/time</p>
+            <p>{{formatDate createdAt}}</p>
           </div>
         </div>
       </div>

@@ -117,7 +117,18 @@
 .card__btns {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 3px;
+}
+.card__btns a {
+  width: 65px;
+  border: 0;
+  outline: 0;
+  border-radius: 6px;
+  padding: 5px 8px;
+  text-align: center;
+  background-color: blue;
+  color: #fff;
+  text-decoration: none;
 }
 .card__btns button {
   width: 65px;
@@ -125,10 +136,7 @@
   outline: 0;
   border-radius: 6px;
   padding: 5px 8px;
-}
-.card__btns button:nth-child(1) {
-  background-color: blue;
-  color: #fff;
+  text-align: center;
 }
 .card__btns button:nth-child(2) {
   background-color: rgb(21, 167, 52);
@@ -137,6 +145,12 @@
 .card__btns button:nth-child(3) {
   background-color: red;
   color: #fff;
+}
+
+.card__auther {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .card__avatar {
