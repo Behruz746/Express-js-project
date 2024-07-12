@@ -139,8 +139,35 @@
   color: #fff;
 }
 
+.card__avatar {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  border-radius: 50%;
+}
+.card__avatar p {
+  text-transform: capitalize;
+  color: #fff;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
+
 @media screen and (max-width: 870px) {
   .product__container {
     justify-content: center;
+  }
+}
+@media screen and (max-width: 760px) {
+  .product__card {
+    max-width: none;
+    width: 100%;
+  }
+  .product__card img {
+    max-width: 500px;
+    width: 100%;
   }
 }/*# sourceMappingURL=style.css.map */

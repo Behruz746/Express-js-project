@@ -10,8 +10,6 @@ router.get("/", async (req, res) => {
     // lean() method malumotni JSON formatga o'griberadi
     const products = await Product.find().lean();
 
-    console.log(req.userId);
-
     res.render("index", {
       title: "Boom Shop",
       product: products.reverse(),
@@ -22,9 +20,15 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/products", (req, res) => {
+router.get("/products", async (req, res) => {
+  const user = req.userId ? req.userId.toString() : null;
+  const myProducts = await Product.find({ user }).populate("user").lean();
+
+  console.log(myProducts.reverse());
+
   res.render("products", {
     title: "Products | Boom Shop",
+    myProducts: myProducts.reverse(),
     isProducts: true,
   });
 });
