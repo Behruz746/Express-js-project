@@ -9,11 +9,13 @@ router.get("/", async (req, res) => {
     // Product.find(); product serverdagi hamma malumotlarni olibberadi
     // lean() method malumotni JSON formatga o'griberadi
     const products = await Product.find().lean();
-    console.log(products);
+
+    console.log(req.userId);
 
     res.render("index", {
       title: "Boom Shop",
-      product: products,
+      product: products.reverse(),
+      userId: req.userId ? req.userId.toString() : null,
     });
   } catch (error) {
     console.log("Serverdan malumot olishda xatolik yuzberdi", error);

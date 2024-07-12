@@ -22,7 +22,7 @@
             <p>${{price}}</p>
           </div>
 
-          <img width="330px" height="220px" src={{image}} alt="{{title}}" />
+          <img width="318px" height="220px" src={{image}} alt="{{title}}" />
         </div>
 
         <div class="card__content">
@@ -34,8 +34,12 @@
           <div class="card__footer">
             <div class="card__btns">
               <button type="button" class="card__btn">View</button>
-              <button type="button" class="card__btn">Edit</button>
-              <button type="button" class="card__btn">Delete</button>
+              {{#if @root.token}}
+                {{#ifequal user @root.userId}}
+                  <button type="button" class="card__btn">Edit</button>
+                  <button type="button" class="card__btn">Delete</button>
+                {{/ifequal}}
+              {{/if}}
             </div>
             <p>time/time</p>
           </div>

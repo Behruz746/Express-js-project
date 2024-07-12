@@ -32,12 +32,13 @@
   width: 100%;
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
   justify-content: flex-start;
   gap: 25px 8px;
 }
 
 .product__card {
-  max-width: 330px;
+  max-width: 318px;
   width: 100%;
   height: 360px;
   border-radius: 8px;
@@ -46,10 +47,17 @@
 }
 
 .card__img {
+  margin: 0 auto;
   width: 100%;
   height: auto;
   position: relative;
   background: #333;
+
+  img {
+    max-width: 318px;
+    width: 100%;
+    height: 220px;
+  }
 
   .card__price {
     position: absolute;
@@ -143,11 +151,6 @@
   }
 }
 
-@media screen and (max-width: 1300px) {
-  .product__container {
-    flex-wrap: wrap;
-  }
-}
 @media screen and (max-width: 870px) {
   .product__container {
     justify-content: center;

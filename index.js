@@ -6,6 +6,8 @@ import session from "express-session";
 import * as dotenv from "dotenv";
 import flash from "connect-flash";
 import varMiddleware from "./middleware/var.js";
+import userMiddleware from "./middleware/user.js";
+import hbsHelper from "./utils/index.js";
 // Routes
 import AutherRouters from "./routes/auth.js";
 import ProductRouters from "./routes/products.js";
@@ -18,6 +20,7 @@ const app = express();
 const hbs = create({
   defaultLayout: "main", // default shablon nomi
   extname: "hbs", // file kengaytirma nomi
+  helpers: hbsHelper,
 });
 
 app.engine("hbs", hbs.engine);
@@ -31,6 +34,7 @@ app.use(cookieParser());
 app.use(
   session({ secret: "darkUser", resave: false, saveUninitialized: false })
 );
+app.use(userMiddleware);
 app.use(flash());
 app.use(varMiddleware);
 app.use(AutherRouters);
