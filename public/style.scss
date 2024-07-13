@@ -140,24 +140,27 @@
     background-color: blue;
     color: #fff;
     text-decoration: none;
+    margin: 0;
   }
 
-  button {
-    width: 65px;
-    border: 0;
-    outline: 0;
-    border-radius: 6px;
-    padding: 5px 8px;
-    text-align: center;
-  }
-
-  button:nth-child(2) {
+  a:nth-child(2) {
     background-color: rgb(21, 167, 52);
     color: #fff;
   }
-  button:nth-child(3) {
-    background-color: red;
-    color: #fff;
+
+  form {
+    margin: 0;
+
+    button {
+      width: 65px;
+      border: 0;
+      outline: 0;
+      border-radius: 6px;
+      padding: 5px 8px;
+      background-color: red;
+      color: #fff;
+      margin: 0;
+    }
   }
 }
 

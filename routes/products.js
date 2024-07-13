@@ -48,8 +48,6 @@ router.get("/edit-product/:id", async (req, res) => {
   }
 
   try {
-    console.log(id, "edit get");
-
     const product = await Product.findById(id).populate("user").lean();
     res.render("edit-product", {
       product: product,
@@ -109,13 +107,23 @@ router.post("/edit-product/:id", async (req, res) => {
       return;
     }
 
-    console.log(id, "edit post");
-
     await Product.findByIdAndUpdate(id, req.body, {
       new: true,
     });
 
     res.redirect("/products");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.post("/delete-product/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    await Product.findByIdAndDelete(id);
+
+    res.redirect("/");
   } catch (error) {
     console.log(error);
   }

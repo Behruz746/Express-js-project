@@ -130,22 +130,24 @@
   background-color: blue;
   color: #fff;
   text-decoration: none;
+  margin: 0;
 }
-.card__btns button {
+.card__btns a:nth-child(2) {
+  background-color: rgb(21, 167, 52);
+  color: #fff;
+}
+.card__btns form {
+  margin: 0;
+}
+.card__btns form button {
   width: 65px;
   border: 0;
   outline: 0;
   border-radius: 6px;
   padding: 5px 8px;
-  text-align: center;
-}
-.card__btns button:nth-child(2) {
-  background-color: rgb(21, 167, 52);
-  color: #fff;
-}
-.card__btns button:nth-child(3) {
   background-color: red;
   color: #fff;
+  margin: 0;
 }
 
 .card__auther {
