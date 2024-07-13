@@ -1,0 +1,60 @@
+<div class="w-75 mx-auto">
+  <p class="fs-1">Edit product</p>
+  {{#if editProductErr}}
+    <div class="promis mb-3">
+      <p>{{editProductErr}}</p>
+      <button type="button" class="remove__btn">
+        <img src="remove.svg" alt="remove icon" />
+      </button>
+    </div>
+  {{/if}}
+  <form action="/edit-product/{{product._id}}" method="post">
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        name="title"
+        value="{{product.title}}"
+        id="floatingInput"
+        placeholder="title"
+      />
+      <label for="floatingInput">Product title</label>
+    </div>
+    <div class="form-floating">
+      <textarea
+        class="form-control text-description"
+        placeholder="Description"
+        name="description"
+        id="floatingTextarea2"
+        style="height: 130px"
+      >{{product.description}}</textarea>
+      <label for="floatingTextarea2">Description</label>
+    </div>
+    <div class="form-floating mt-3">
+      <input
+        type="text"
+        class="form-control"
+        name="image"
+        value="{{product.image}}"
+        id="floatingInput"
+        placeholder="product image"
+      />
+      <label for="floatingInput">Product image</label>
+    </div>
+    <div class="input-group mt-3">
+      <span class="input-group-text">$</span>
+      <div class="form-floating">
+        <input
+          type="number"
+          class="form-control"
+          name="price"
+          value="{{product.price}}"
+          id="floatingInputGroup1"
+          placeholder="price"
+        />
+        <label for="floatingInputGroup1">Product price</label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Edit product</button>
+  </form>
+</div>

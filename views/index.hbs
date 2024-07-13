@@ -33,14 +33,10 @@
 
           <div class="card__footer">
             <div class="card__btns">
-              <a
-                type="button"
-                href="/product/{{_id}}"
-                class="card__btn"
-              >Detail</a>
+              <a href="/product/{{_id}}" class="card__btn">Detail</a>
               {{#if @root.token}}
                 {{#ifequal user @root.userId}}
-                  <button type="button" class="card__btn">Edit</button>
+                  <a href="/edit-product/{{_id}}" class="card__btn">Edit</a>
                   <button type="button" class="card__btn">Delete</button>
                 {{/ifequal}}
               {{/if}}

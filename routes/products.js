@@ -2,6 +2,7 @@ import { Router } from "express";
 import { authProductMiddleware } from "../middleware/auth.js";
 import userMiddleware from "../middleware/user.js";
 import Product from "../models/Product.js";
+import mongoose from "mongoose";
 const router = Router();
 
 router.get("/", async (req, res) => {
@@ -22,6 +23,9 @@ router.get("/", async (req, res) => {
 
 router.get("/product/:id", async (req, res) => {
   const id = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send("Invalid ID format");
+  }
 
   try {
     const product = await Product.findById(id).populate("user").lean();
@@ -37,11 +41,29 @@ router.get("/product/:id", async (req, res) => {
   }
 });
 
+router.get("/edit-product/:id", async (req, res) => {
+  const id = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send("Invalid ID format");
+  }
+
+  try {
+    console.log(id, "edit get");
+
+    const product = await Product.findById(id).populate("user").lean();
+    res.render("edit-product", {
+      product: product,
+      editProductErr: req.flash("editProductErr"),
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server error");
+  }
+});
+
 router.get("/products", async (req, res) => {
   const user = req.userId ? req.userId.toString() : null;
   const myProducts = await Product.find({ user }).populate("user").lean();
-
-  console.log(myProducts.reverse());
 
   res.render("products", {
     title: "Products | Boom Shop",
@@ -68,10 +90,34 @@ router.post("/add-products", userMiddleware, async (req, res) => {
       return;
     }
 
-    const product = await Product.create({ ...req.body, user: req.userId });
+    await Product.create({ ...req.body, user: req.userId });
     res.redirect("/products");
   } catch (error) {
     console.log("Product yaratishda xatolik bo'ldi ", error);
+  }
+});
+
+router.post("/edit-product/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const { title, description, image, price } = req.body;
+
+    if (!title || !description || !image || !price) {
+      req.flash("editProductErr", "All fields is required");
+      res.redirect(`/edit-product/${id}`);
+      return;
+    }
+
+    console.log(id, "edit post");
+
+    await Product.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+
+    res.redirect("/products");
+  } catch (error) {
+    console.log(error);
   }
 });
 
